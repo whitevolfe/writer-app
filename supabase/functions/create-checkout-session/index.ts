@@ -14,10 +14,9 @@ serve(async (req) => {
 
   try {
     const { priceId } = await req.json()
-    
     const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      process.env.SUPABASE_URL ?? '',
+      process.env.SUPABASE_ANON_KEY ?? '',
     )
 
     const authHeader = req.headers.get('Authorization')!
@@ -30,7 +29,7 @@ serve(async (req) => {
       throw new Error('No email found')
     }
 
-    const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
       apiVersion: '2023-10-16',
     })
 
