@@ -87,9 +87,8 @@ const PricingPlans = () => {
 
       const { url } = await response.json();
       if (!url) throw new Error('No checkout URL received');
-      
       window.location.href = url;
-    } catch (error: any) {
+    } catch (error: Error) {
       console.error("Checkout error:", error);
       toast.error(error.message || "Failed to start checkout process");
     } finally {
