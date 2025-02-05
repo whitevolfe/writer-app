@@ -73,7 +73,6 @@ const PricingPlans = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
           'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY || '',
         },
         body: JSON.stringify({ priceId: plan.priceId }),
@@ -88,7 +87,7 @@ const PricingPlans = () => {
       const { url } = await response.json();
       if (!url) throw new Error('No checkout URL received');
       window.location.href = url;
-    } catch (error: Error) {
+    } catch (error) {
       console.error("Checkout error:", error);
       toast.error(error.message || "Failed to start checkout process");
     } finally {
